@@ -117,12 +117,27 @@ a{color:inherit}
 .static-copy{display:none}
 @media (max-height:560px){.cue,.ring{display:none}}
 
-/* static hero (five gates; must match GATES in JS exactly) */
-@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
+/* phone and portrait-tablet scrub: video in the top of the screen, captions below it */
+@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px){
+  .hero{height:420vh;height:420svh}
+  .poster,.stage video{top:0;bottom:auto;height:64%;object-position:50% 30%;background-position:50% 30%}
+  .scrim{background:linear-gradient(180deg,rgba(12,9,7,.35) 0%,rgba(12,9,7,0) 14%,rgba(12,9,7,0) 46%,var(--canvas) 64%,var(--canvas) 100%)}
+  .band,.b3{left:var(--gutter);right:var(--gutter);top:auto;bottom:calc(5% + env(safe-area-inset-bottom,0px));transform:none;width:auto;max-width:560px}
+  .band::before{inset:-30% -12%}
+  .band h1,.band h2{font-size:clamp(26px,7.6vw,44px)}
+  .band p.sub{margin-top:14px;font-size:15px}
+  .band .row{margin-top:20px}
+  .band .kicker{margin-bottom:12px}
+  .cue{display:none}
+  .ring{top:calc(64% - 60px);bottom:auto}
+}
+
+/* static hero (two gates; must match GATES in JS exactly) */
+@media (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
   .hero{height:auto}
   .stage{position:relative;height:auto;min-height:100svh;display:flex;align-items:flex-end}
   .stage video,.band,.ring,.cue{display:none}
-  .poster{background-image:url('assets/razor-ending.jpg');background-position:50% 8%}
+  .poster{top:0;bottom:0;height:100%;background-image:url('assets/razor-ending.jpg');background-position:50% 8%}
   .scrim{background:linear-gradient(180deg,rgba(12,9,7,.2) 0%,rgba(12,9,7,0) 22%,rgba(12,9,7,.88) 56%,var(--canvas) 100%)}
   .static-copy{display:block;position:relative;padding:120px var(--gutter) 56px;text-shadow:var(--tshadow)}
   .static-copy h1{font:800 clamp(32px,9vw,56px)/1.06 var(--display);text-transform:uppercase;margin:12px 0 0}
@@ -605,7 +620,8 @@ function makeScrub(cfg){
     clearTimeout(watchdog); if (ring) ring.style.setProperty('--ld', 0);
     video.src = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
     video.load();
-    video.addEventListener('canplay', () => {
+    video.addEventListener('canplay', async () => {
+      try { await video.play(); video.pause(); } catch (e) {}   // iOS Safari paints seeked frames only after one muted play
       requestSeek(progress() * video.duration);
       stage.classList.add('video-ready');
       if (ring) setTimeout(() => { ring.style.transition = 'opacity .6s'; ring.style.opacity = 0; }, 400);
@@ -640,9 +656,6 @@ const scenes = [
 ];
 
 const GATES = [
-  '(max-width: 720px)',
-  '(orientation: portrait) and (max-width: 1024px)',
-  '(orientation: portrait) and (pointer: coarse)',
   '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
   '(prefers-reduced-motion: reduce)'
 ];
