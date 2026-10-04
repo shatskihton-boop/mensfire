@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MensFire · барбершоп в Самаре</title>
-<meta name="description" content="Барбершоп MensFire на Московском шоссе, 53 в Самаре. Мужская стрижка от 1300 ₽, борода, королевское бритьё. Рейтинг 5,0 на Яндекс Картах.">
+<meta name="description" content="Барбершоп MensFire на улице Советской Армии, 201 в Самаре. Мужская стрижка от 1300 ₽, борода, стрижка с сыном. Онлайн-запись к мастеру.">
 <meta name="theme-color" content="#15120f">
 <meta property="og:title" content="MensFire · барбершоп в Самаре">
-<meta property="og:description" content="Мужская стрижка по красоте. Московское шоссе, 53. Рейтинг 5,0 на Яндекс Картах.">
+<meta property="og:description" content="Мужская стрижка по красоте. Самара, улица Советской Армии, 201. Онлайн-запись к мастеру.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://shatskihton-boop.github.io/mensfire/assets/razor-ending.jpg">
 <meta property="og:url" content="https://shatskihton-boop.github.io/mensfire/">
@@ -237,6 +237,39 @@ h2.title{font:800 clamp(30px,4vw,56px)/1.08 var(--display);text-transform:upperc
 .quote figcaption{margin-top:18px;color:var(--text-secondary)}
 @media (max-width:860px){.reviews-grid,.quotes{grid-template-columns:1fr}.score{position:static}}
 
+/* masters */
+[hidden]{display:none!important}
+.masters-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.masters-head .score{position:static;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.masters-head .score b{font:800 clamp(56px,7vw,96px)/.9 var(--display);letter-spacing:-.03em}
+.masters-head .score b em{font-style:normal;color:var(--accent)}
+.masters-head .score span:last-child{color:var(--text-secondary);font-size:15px}
+.stars{color:var(--accent);letter-spacing:.15em}
+.masters{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:clamp(40px,5vw,64px)}
+.master{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;min-width:0}
+.ava{width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-muted);margin-bottom:10px;background:var(--panel-2)}
+.master blockquote{margin:0 0 16px;font-size:15px;line-height:1.5;color:var(--text-primary);opacity:.9}
+.master blockquote cite{display:block;margin-top:6px;font-style:normal;color:var(--text-secondary);font-size:13px}
+.master h3{margin:0;font:600 24px/1.1 var(--display);text-transform:uppercase}
+.master .lvl{margin:0;color:var(--accent);font:400 13px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.master .rev{margin:0 0 14px;color:var(--text-secondary);font-size:15px}
+.master .btn{margin-top:auto}
+.plist li .n small{color:var(--text-secondary);font-size:13px}
+@media (max-width:980px){.masters{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.masters{grid-template-columns:1fr}}
+
+/* sound toggle */
+.nav-right{display:flex;align-items:center;gap:12px}
+.sound{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line-strong);color:var(--text-secondary);border-radius:999px;padding:9px 14px;font:600 14px/1 var(--body);cursor:pointer;transition:color .3s var(--ease-out),border-color .3s var(--ease-out)}
+.sound svg{width:18px;height:18px}
+.sound .w1,.sound .w2{display:none}
+.sound.on{color:var(--text-primary);border-color:var(--text-primary)}
+.sound.on .w1,.sound.on .w2{display:inline}
+.sound.on .x{display:none}
+@media (max-width:520px){.sound span{display:none}.sound{padding:9px}.nav{gap:10px}.nav-right{gap:8px}.nav .btn.sm{padding:10px 14px;font-size:14px}}
+@media (max-width:400px){.brand .wm small{display:none}.brand .wm{font-size:15px}.brand svg{width:28px;height:34px}}
+@media (pointer:coarse){.sound{min-height:44px;min-width:44px;justify-content:center}}
+
 /* faq */
 .faq-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(32px,6vw,96px)}
 details{border-bottom:1px solid var(--line)}
@@ -308,11 +341,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <ul>
     <li><a href="#visit">Визит</a></li>
     <li><a href="#prices">Цены</a></li>
-    <li><a href="#shave">Бритьё</a></li>
-    <li><a href="#reviews">Отзывы</a></li>
+    <li><a href="#masters">Мастера</a></li>
     <li><a href="#contacts">Контакты</a></li>
   </ul>
-  <a class="btn fire sm" href="#book">Записаться</a>
+  <div class="nav-right">
+    <button class="sound" id="soundBtn" type="button" aria-pressed="false" aria-label="Включить звук"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="w1" d="M16 9.5a3.5 3.5 0 0 1 0 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="w2" d="M18.5 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="x" d="M16.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Звук</span></button>
+    <a class="btn fire sm" href="#book" data-book>Записаться</a>
+  </div>
 </nav>
 
 <header class="hero" id="top">
@@ -324,7 +359,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <div class="band b1" data-a="0" data-b="0.30" style="--sa:.72">
       <p class="kicker mono">Барбершоп · Самара</p>
       <h1 class="stack"><span class="sr-only">Мужская стрижка по красоте.</span><span class="soft" aria-hidden="true">Мужская стрижка по красоте.</span><span class="sharp" aria-hidden="true">Мужская стрижка по красоте.</span></h1>
-      <p class="sub">Московское шоссе, 53 · 5,0 на Яндекс Картах</p>
+      <p class="sub">Самара, ул. Советской Армии, 201 · онлайн-запись к мастеру</p>
     </div>
 
     <div class="band b2" data-a="0.36" data-b="0.62" data-ramp="0.12" style="--sa:.7">
@@ -334,15 +369,15 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
     <div class="band b3" data-a="0.70" data-b="1" style="--sa:.72" data-ramp="0.07">
       <h2 data-split>Чёткие линии. Никакой спешки.</h2>
-      <p class="sub">Стрижка от 1300 ₽, королевское бритьё 1200 ₽. Записывайтесь на своё время.</p>
-      <div class="row"><a class="btn fire" href="#book">Записаться</a><a class="btn" href="#prices">Цены</a></div>
+      <p class="sub">Стрижка от 1300 ₽, стрижка с бородой от 2300 ₽. Записывайтесь на своё время.</p>
+      <div class="row"><a class="btn fire" href="#book" data-book>Записаться</a><a class="btn" href="#prices">Цены</a></div>
     </div>
 
     <div class="static-copy">
       <p class="mono" style="color:var(--text-secondary);margin:0">Барбершоп · Самара</p>
       <h1>Мужская стрижка по красоте.</h1>
-      <p>Барбершоп MensFire. Самара, Московское шоссе, 53. Рейтинг 5,0 по 151 отзыву на Яндекс Картах.</p>
-      <a class="btn fire" href="#book">Записаться</a>
+      <p>Барбершоп MensFire. Самара, улица Советской Армии, 201. Четыре мастера, онлайн-запись на удобное время.</p>
+      <a class="btn fire" href="#book" data-book>Записаться</a>
     </div>
 
     <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="track" cx="24" cy="24" r="20" fill="none" stroke-width="2"/><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/></svg>
@@ -354,11 +389,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
   <section class="trust reveal" aria-label="Коротко о нас">
     <ul>
-      <li class="r"><b><em data-count="5" data-dec="1">5,0</em></b><span>рейтинг на Яндекс Картах</span></li>
-      <li class="r"><b data-count="151">151</b><span>отзыв клиентов</span></li>
-      <li class="r"><b>Парковка</b><span>для клиентов</span></li>
-      <li class="r"><b>Wi‑Fi</b><span>пока вы в кресле</span></li>
-      <li class="r"><b>Подарок</b><span>сертификат на стрижку</span></li>
+      <li class="r"><b><em data-count="5" data-dec="1">5,0</em></b><span>оценка в онлайн-записи</span></li>
+      <li class="r"><b data-count="17">17</b><span>отзывов о филиале</span></li>
+      <li class="r"><b data-count="4">4</b><span>мастера в команде</span></li>
+      <li class="r"><b data-count="15">15</b><span>услуг в прайсе</span></li>
+      <li class="r"><b>Онлайн</b><span>запись на своё время</span></li>
     </ul>
   </section>
 
@@ -390,57 +425,52 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
         <p class="kick mono r">Цены</p>
         <h2 class="title r" id="prices-t">Цена известна до записи</h2>
-        <p class="lede r">Барбер и топ‑барбер отличаются опытом. Никаких доплат в конце.</p>
+        <p class="lede r">Барбер и эксперт-барбер отличаются опытом. Время и цена каждой услуги видны заранее.</p>
       </div>
       <div class="tabs r" role="tablist" aria-label="Уровень мастера">
         <span class="pill" aria-hidden="true"></span>
         <button role="tab" aria-selected="true" aria-controls="plist" data-tier="b">Барбер</button>
-        <button role="tab" aria-selected="false" aria-controls="plist" data-tier="t">Топ‑барбер</button>
+        <button role="tab" aria-selected="false" aria-controls="plist" data-tier="t">Эксперт-барбер</button>
       </div>
     </div>
     <ul class="plist show" id="plist" role="tabpanel" aria-live="polite"></ul>
-    <p class="note">Записаться можно по телефону, в мессенджерах или на Яндекс Картах.</p>
+    <p class="note">Цены филиала на улице Советской Армии, 201. ТОП-барберы работают по ценам эксперт-барбера.</p>
   </section>
 
   <section id="shave" aria-labelledby="shave-t">
     <div class="shave-wrap">
       <div class="reveal">
         <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
-        <p class="kick mono r">Ритуал</p>
-        <h2 class="title r" id="shave-t">Королевское бритьё</h2>
-        <p class="lede r">Полчаса, которые мужчины потом пересказывают друзьям. Зажмите кнопку и проведите бритвой сами.</p>
+        <p class="kick mono r">Самый частый выбор</p>
+        <h2 class="title r" id="shave-t">Стрижка и борода</h2>
+        <p class="lede r">Один час, и голова с бородой в одном стиле. Зажмите кнопку и проведите бритвой сами.</p>
         <button class="btn hold r" id="holdBtn" type="button" aria-describedby="shave-t"><span class="fill" aria-hidden="true"></span><span>Зажмите, чтобы побрить</span></button>
       </div>
       <div class="card" id="shaveCard">
         <ol>
-          <li>Горячее полотенце.</li>
-          <li>Тёплая пена.</li>
-          <li>Опасная бритва.</li>
-          <li>Холодный компресс.</li>
+          <li>Разговор о форме.</li>
+          <li>Стрижка.</li>
+          <li>Борода и усы.</li>
+          <li>Чёткий контур.</li>
         </ol>
-        <p class="price" style="position:absolute;left:clamp(28px,4vw,48px);bottom:24px;margin:0">1200 ₽ · 30 мин</p>
+        <p class="price" style="position:absolute;left:clamp(28px,4vw,48px);bottom:24px;margin:0">от 2 300 ₽ · 1 час</p>
         <div class="foam" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
         <div class="razor" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <section id="reviews" aria-labelledby="reviews-t">
-    <div class="reviews-grid">
-      <div class="score reveal">
-        <p class="kick mono r">Отзывы</p>
-        <b class="r"><em>5,0</em></b>
-        <div class="stars r" aria-label="Пять звёзд из пяти"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1l2.7 5.6 6.1.9-4.4 4.3 1 6.1L10 15l-5.4 2.9 1-6.1L1.2 7.5l6.1-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1l2.7 5.6 6.1.9-4.4 4.3 1 6.1L10 15l-5.4 2.9 1-6.1L1.2 7.5l6.1-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1l2.7 5.6 6.1.9-4.4 4.3 1 6.1L10 15l-5.4 2.9 1-6.1L1.2 7.5l6.1-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1l2.7 5.6 6.1.9-4.4 4.3 1 6.1L10 15l-5.4 2.9 1-6.1L1.2 7.5l6.1-.9z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1l2.7 5.6 6.1.9-4.4 4.3 1 6.1L10 15l-5.4 2.9 1-6.1L1.2 7.5l6.1-.9z"/></svg></div>
-        <p class="r" id="reviews-t">151 отзыв на Яндекс Картах. Пишут сами клиенты, мы ничего не правим.</p>
-        <a class="btn sm r" href="https://yandex.ru/maps/org/39471792991/reviews/" target="_blank" rel="noopener">Все отзывы на Яндекс Картах</a>
+  <section id="masters" aria-labelledby="masters-t">
+    <div class="masters-head reveal">
+      <div>
+        <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+        <p class="kick mono r">Мастера</p>
+        <h2 class="title r" id="masters-t">Выберите своего барбера</h2>
+        <p class="lede r">У каждого оценка 5 из 5 в онлайн-записи. Отзывы пишут клиенты после визита.</p>
       </div>
-      <div class="quotes reveal">
-        <figure class="quote r"><blockquote>«Мастера очень хорошие, стригут очень хорошо, можно поболтать о чём угодно, посмеяться, делают всё по красоте.»</blockquote><figcaption>Сергей Борисов</figcaption></figure>
-        <figure class="quote r"><blockquote>«Первоклассная стрижка и атмосфера. Лучшее место в городе, где знают толк в мужском стиле.»</blockquote><figcaption>Дмитрий</figcaption></figure>
-        <figure class="quote r"><blockquote>«Персонал замечательный, настоящие профессионалы!»</blockquote><figcaption>semoleg2016</figcaption></figure>
-        <figure class="quote r"><blockquote>«Прекрасное обслуживание, общительный персонал, а причёска и завивка на высшем уровне.»</blockquote><figcaption>Валерия Бабенко</figcaption></figure>
-      </div>
+      <div class="score r" aria-label="Оценка филиала 5 из 5, 17 отзывов"><b><em>5,0</em></b><span class="stars" aria-hidden="true">★★★★★</span><span>17 отзывов о филиале</span></div>
     </div>
+    <div class="masters reveal" id="mastersList"></div>
   </section>
 
   <section id="faq" aria-labelledby="faq-t">
@@ -451,12 +481,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <h2 class="title r" id="faq-t">Что обычно спрашивают</h2>
       </div>
       <div>
-        <details><summary>А если результат не понравится?<i aria-hidden="true"></i></summary><p>Скажите сразу, пока вы в кресле. Мастер поправит.</p></details>
         <details><summary>Можно прийти без записи?<i aria-hidden="true"></i></summary><p>Если мастер свободен, да. Чтобы не ждать, лучше записаться заранее.</p></details>
-        <details><summary>Стрижёте детей?<i aria-hidden="true"></i></summary><p>Да. Детская стрижка от 1000 ₽.</p></details>
-        <details><summary>Закрасите седину?<i aria-hidden="true"></i></summary><p>Да, камуфляж седины за 30 минут, выглядит естественно. 1200 ₽.</p></details>
-        <details><summary>Где оставить машину?<i aria-hidden="true"></i></summary><p>У нас есть парковка для клиентов.</p></details>
-        <details><summary>Можно подарить стрижку?<i aria-hidden="true"></i></summary><p>Да, у нас есть подарочные сертификаты.</p></details>
+        <details><summary>Стрижёте детей?<i aria-hidden="true"></i></summary><p>Да. Детская стрижка от 1000 ₽, у эксперт-барбера для детей до 10 лет 1500 ₽.</p></details>
+        <details><summary>Закрасите седину?<i aria-hidden="true"></i></summary><p>Да, камуфляж седины или бороды за 45 минут, 1200 ₽.</p></details>
+        <details><summary>Можно прийти вместе с сыном или другом?<i aria-hidden="true"></i></summary><p>Да, для этого есть услуги «Папа + сын» от 2100 ₽ и «Друг + друг» от 2400 ₽.</p></details>
+        <details><summary>Можно выбрать конкретного мастера?<i aria-hidden="true"></i></summary><p>Да. В онлайн-записи видно всех мастеров и их ближайшее свободное время.</p></details>
       </div>
     </div>
   </section>
@@ -465,14 +494,14 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <div class="reveal">
       <p class="kick mono r" style="justify-content:center">Запись</p>
       <h2 class="title r" id="book-t">Ваше время свободно</h2>
-      <p class="lede r">Выберите, как удобнее. Ответим и подберём мастера и время.</p>
+      <p class="lede r">Выберите услугу, мастера и время в онлайн-записи. Это займёт пару минут.</p>
     </div>
     <div class="ways reveal">
-      <a class="way main r" href="tel:+79608081228"><span class="go">Позвонить</span><h3>+7 960 808‑12‑28</h3><p>Самый быстрый способ. Скажите услугу и удобное время.</p></a>
-      <div class="way r"><span class="go">Написать</span><h3>Мессенджеры</h3><p>Напишите, когда удобно, и мы подтвердим запись.</p><div class="msg"><a class="btn sm" href="https://wa.me/79608081228" target="_blank" rel="noopener">WhatsApp</a><a class="btn sm" href="https://t.me/+79608081228" target="_blank" rel="noopener">Telegram</a></div></div>
-      <a class="way r" id="onlineBook" href="https://yandex.ru/maps/org/39471792991/" target="_blank" rel="noopener"><span class="go">Онлайн</span><h3>Яндекс Карты</h3><p>Запись в нашей карточке на Яндекс Картах, там же маршрут и отзывы.</p></a>
+      <a class="way main r" href="#book" data-book target="_blank" rel="noopener"><span class="go">Онлайн</span><h3>Запись к мастеру</h3><p>Услуги, мастера и свободное время в одном окне. Подтверждение придёт сразу.</p></a>
+      <a class="way r" href="#book" data-phone hidden><span class="go">Позвонить</span><h3 data-phone-text>Телефон</h3><p>Скажите услугу и удобное время, администратор подберёт мастера.</p></a>
+      <a class="way r" href="https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%B9%20%D0%90%D1%80%D0%BC%D0%B8%D0%B8%2C%20201" target="_blank" rel="noopener"><span class="go">Адрес</span><h3>Советской Армии, 201</h3><p>Маршрут на Яндекс Картах.</p></a>
     </div>
-    <a class="btn fire big" href="tel:+79608081228">Записаться по телефону</a>
+    <a class="btn fire big" href="#book" data-book target="_blank" rel="noopener">Записаться онлайн</a>
   </section>
 
   <section id="contacts" aria-labelledby="contacts-t">
@@ -480,14 +509,14 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <div class="reveal">
         <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
         <p class="kick mono r">Контакты</p>
-        <h2 class="title r" id="contacts-t">Московское шоссе, 53</h2>
+        <h2 class="title r" id="contacts-t">Советской Армии, 201</h2>
         <dl class="r">
-          <div><dt>Адрес</dt><dd>Самара, Московское шоссе, 53</dd></div>
-          <div><dt>Телефон</dt><dd><a href="tel:+79608081228">+7 960 808‑12‑28</a></dd></div>
+          <div><dt>Адрес</dt><dd>Самара, улица Советской Армии, 201</dd></div>
+          <div data-phone-row hidden><dt>Телефон</dt><dd><a href="#contacts" data-phone data-phone-text>Телефон</a></dd></div>
         </dl>
-        <p class="r" style="margin-top:30px"><a class="btn" href="https://yandex.ru/maps/?rtext=~53.224275%2C50.19256&mode=route&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D39471792991" target="_blank" rel="noopener">Как доехать</a></p>
+        <p class="r" style="margin-top:30px"><a class="btn" href="https://yandex.ru/maps/?rtext=~%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%B9%20%D0%90%D1%80%D0%BC%D0%B8%D0%B8%2C%20201&mode=route" target="_blank" rel="noopener">Как доехать</a></p>
       </div>
-      <div class="map" id="map" aria-label="Карта: MensFire на Московском шоссе, 53"></div>
+      <div class="map" id="map" aria-label="Карта: MensFire на улице Советской Армии, 201"></div>
     </div>
   </section>
 </main>
@@ -497,10 +526,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <svg viewBox="0 0 100 120" aria-hidden="true" style="width:28px;height:34px"><g fill="none" stroke="#efe9e1" stroke-width="6"><circle cx="31" cy="22" r="14"/><circle cx="69" cy="22" r="14"/></g><path d="M38 34 L86 114 L80 117 L33 38Z M62 34 L14 114 L20 117 L67 38Z" fill="#efe9e1"/><circle cx="50" cy="62" r="4.5" fill="#e2552b"/></svg>
     <span class="wm">MENSFIRE<small>BARBERSHOP</small></span>
   </a>
-  <span>Самара, Московское шоссе, 53 · <a href="tel:+79608081228">+7 960 808‑12‑28</a></span>
+  <span>Самара, улица Советской Армии, 201<span data-phone-row hidden> · <a href="#contacts" data-phone data-phone-text>Телефон</a></span></span>
   <span>© <span id="yr">2026</span> MensFire</span>
 </footer>
 
+<script src="assets/data.js"></script>
 <script>
 (() => {
 'use strict';
@@ -591,6 +621,7 @@ function makeScrub(cfg){
     else rafId = requestAnimationFrame(tick);
     requestSeek(shown * (video.duration || 0));
     updateCaptions(shown);
+    if (cfg.onFrame) cfg.onFrame(shown);
   }
   function onScroll(){ target = progress(); if (rafId === null && onScreen) rafId = requestAnimationFrame(tick); }
   new IntersectionObserver(es => { onScreen = es[0].isIntersecting; if (onScreen && on) onScroll(); }).observe(root);
@@ -652,7 +683,7 @@ function makeScrub(cfg){
   };
 }
 const scenes = [
-  makeScrub({ root: $('.hero'), stage: $('#stage'), video: $('#hero'), poster: $('#poster'), ring: $('#stage .ring'), url: 'assets/razor-scrub.mp4', bytes: 4776604, posterUrl: 'assets/razor-poster.jpg', rampFirst: true, lazy: false })
+  makeScrub({ root: $('.hero'), stage: $('#stage'), video: $('#hero'), poster: $('#poster'), ring: $('#stage .ring'), url: 'assets/razor-scrub.mp4', bytes: 4776604, posterUrl: 'assets/razor-poster.jpg', rampFirst: true, lazy: false, onFrame: p => window.__mfSound && window.__mfSound(p) })
 ];
 
 const GATES = [
@@ -684,14 +715,13 @@ function countUp(el){
 }
 
 /* ---------- prices ---------- */
-const PRICES = {
-  b: [['Мужская стрижка', 1300, 45], ['Детская стрижка', 1000, 30], ['Оформление бороды', 1000, 30], ['Королевское бритьё', 1200, 30], ['Камуфляж седины', 1200, 30], ['Укладка', 500, 20], ['Коррекция горячим воском', 300, 20]],
-  t: [['Мужская стрижка', 1500, 30], ['Детская стрижка', 1200, 45], ['Оформление бороды', 1000, 45], ['Камуфляж седины', 1200, 30], ['Укладка', 500, 20], ['Коррекция горячим воском', 300, 20]]
-};
+const MF = window.MENSFIRE;
+const PRICES = { b: MF.prices.barber, t: MF.prices.expert };
 const plist = $('#plist'), tabs = $$('.tabs button'), pill = $('.tabs .pill');
+const dur = m => m < 60 ? m + '\u00a0мин' : (m % 60 ? Math.floor(m / 60) + '\u00a0ч\u00a0' + (m % 60) + '\u00a0мин' : (m / 60) + '\u00a0ч');
 const money = n => n.toLocaleString('ru-RU').replace(/\s/g, ' ') + ' ₽';
 function renderPrices(tier){
-  plist.innerHTML = PRICES[tier].map(([n, p, t], i) => `<li style="transition-delay:${RM.matches ? 0 : i * 50}ms"><span class="n">${n}</span><span class="dots" aria-hidden="true"></span><span class="t">${t} мин</span><span class="p">${money(p)}</span></li>`).join('');
+  plist.innerHTML = PRICES[tier].map(([n, note, t, p], i) => `<li style="transition-delay:${RM.matches ? 0 : i * 35}ms"><span class="n">${n}${note ? ` <small>${note}</small>` : ''}</span><span class="dots" aria-hidden="true"></span><span class="t">${dur(t)}</span><span class="p">${money(p)}</span></li>`).join('');
 }
 function movePill(btn){ pill.style.width = btn.offsetWidth + 'px'; pill.style.transform = `translateX(${btn.offsetLeft - 5}px)`; }
 function selectTier(btn){
@@ -739,9 +769,72 @@ holdBtn.addEventListener('contextmenu', e => e.preventDefault());
 /* ---------- map (lazy) ---------- */
 const mapEl = $('#map');
 new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disconnect();
-  const f = document.createElement('iframe'); f.title = 'Карта: MensFire, Самара, Московское шоссе, 53'; f.loading = 'lazy';
-  f.src = 'https://yandex.ru/map-widget/v1/?ll=50.19256%2C53.224275&z=16&pt=50.19256%2C53.224275%2Cpm2rdm'; mapEl.appendChild(f);
+  const f = document.createElement('iframe'); f.title = 'Карта: MensFire, Самара, улица Советской Армии, 201'; f.loading = 'lazy';
+  f.src = 'https://yandex.ru/map-widget/v1/?ll=50.193294%2C53.229296&z=16&pt=50.193294%2C53.229296%2Cpm2rdm'; mapEl.appendChild(f);
 }, { rootMargin: '300px' }).observe(mapEl);
+
+/* ---------- masters, booking links, phone (all from assets/data.js) ---------- */
+const plural = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : (a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many); };
+$('#mastersList').innerHTML = MF.masters.map(m => `<article class="master r"><img class="ava" src="${m.photo}" alt="${m.name}, ${m.level.toLowerCase()}" width="100" height="100" loading="lazy"><h3>${m.name}</h3><p class="lvl">${m.level}</p><p class="rev"><span class="stars" aria-hidden="true">★★★★★</span> ${m.reviews} ${plural(m.reviews, 'отзыв', 'отзыва', 'отзывов')}</p>${m.quote ? `<blockquote>«${m.quote}»<cite>${m.author}</cite></blockquote>` : ''}<a class="btn sm" href="${m.link || MF.booking}" target="_blank" rel="noopener">Записаться к мастеру</a></article>`).join('');
+$$('[data-book]').forEach(a => {
+  if (MF.booking){ a.href = MF.booking; a.target = '_blank'; a.rel = 'noopener'; }
+  else { a.href = '#book'; a.removeAttribute('target'); }
+});
+if (MF.phone){
+  const pretty = MF.phone.replace(/^\+7(\d{3})(\d{3})(\d{2})(\d{2})$/, '+7 $1 $2\u2011$3\u2011$4');
+  $$('[data-phone]').forEach(a => { a.href = 'tel:' + MF.phone; a.hidden = false; });
+  $$('[data-phone-text]').forEach(e => { e.textContent = pretty; });
+  $$('[data-phone-row]').forEach(e => { e.hidden = false; });
+}
+
+/* ---------- sound: soft room tone + a razor that sounds while the hero scrolls ---------- */
+const soundBtn = $('#soundBtn');
+let ac = null, master = null, razorGain = null, soundOn = false, lastP = null, lastT = 0, quietTimer = 0;
+function noise(ctx, brown){
+  const len = ctx.sampleRate * 2, buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < len; i++){ const w = Math.random() * 2 - 1; if (brown){ last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; } else d[i] = w; }
+  return buf;
+}
+function buildAudio(){
+  ac = new (window.AudioContext || window.webkitAudioContext)();
+  master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+  const room = ac.createBufferSource(); room.buffer = noise(ac, true); room.loop = true;
+  const roomLp = ac.createBiquadFilter(); roomLp.type = 'lowpass'; roomLp.frequency.value = 380;
+  const roomG = ac.createGain(); roomG.gain.value = 0.22;
+  room.connect(roomLp).connect(roomG).connect(master); room.start();
+  const hum = ac.createOscillator(); hum.frequency.value = 55;
+  const humG = ac.createGain(); humG.gain.value = 0.012;
+  hum.connect(humG).connect(master); hum.start();
+  const rz = ac.createBufferSource(); rz.buffer = noise(ac, false); rz.loop = true;
+  const hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 1400;
+  const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 3200; bp.Q.value = 0.9;
+  const grain = ac.createGain(); grain.gain.value = 0.6;
+  const lfo = ac.createOscillator(); lfo.type = 'sawtooth'; lfo.frequency.value = 38;
+  const lfoG = ac.createGain(); lfoG.gain.value = 0.4; lfo.connect(lfoG).connect(grain.gain); lfo.start();
+  razorGain = ac.createGain(); razorGain.gain.value = 0;
+  rz.connect(hp).connect(bp).connect(grain).connect(razorGain).connect(master); rz.start();
+}
+window.__mfSound = p => {
+  if (!soundOn || !ac) return;
+  const now = performance.now();
+  const vel = lastP === null ? 0 : Math.abs(p - lastP) / Math.max(16, now - lastT) * 1000;
+  lastP = p; lastT = now;
+  const onStroke = p > 0.04 && p < 0.78 ? 1 : 0;        // the razor travels across the head in this stretch
+  razorGain.gain.setTargetAtTime(Math.min(0.5, vel * 2.2) * onStroke, ac.currentTime, 0.05);
+  clearTimeout(quietTimer);
+  quietTimer = setTimeout(() => razorGain.gain.setTargetAtTime(0, ac.currentTime, 0.12), 120);
+};
+function setSound(v){
+  soundOn = v;
+  soundBtn.classList.toggle('on', v);
+  soundBtn.setAttribute('aria-pressed', v ? 'true' : 'false');
+  soundBtn.setAttribute('aria-label', v ? 'Выключить звук' : 'Включить звук');
+  if (v){ if (!ac) buildAudio(); ac.resume(); master.gain.setTargetAtTime(0.9, ac.currentTime, 0.4); }
+  else if (ac) master.gain.setTargetAtTime(0, ac.currentTime, 0.15);
+}
+soundBtn.addEventListener('click', () => setSound(!soundOn));
+document.addEventListener('visibilitychange', () => { if (!ac) return; if (document.hidden) ac.suspend(); else if (soundOn) ac.resume(); });
 
 /* ---------- reduced motion, live ---------- */
 function pinToFinalStates(){
