@@ -25,6 +25,7 @@
   --accent-muted:rgba(226,85,43,.28);
   --text-secondary:#a59d93;
   --text-primary:#efe9e1;
+  --pole-blue:#3d6fd6;      /* only for the barber pole stripes */
   --line:rgba(239,233,225,.12);
   --line-strong:rgba(239,233,225,.42);
   --ease-out:cubic-bezier(.22,1,.36,1);
@@ -152,9 +153,22 @@ h2.title{font:800 clamp(30px,4vw,56px)/1.08 var(--display);text-transform:upperc
 /* scissors ornament: drawn by scroll (--dp), then one snip (--c), both written by JS */
 .blade{display:block;width:140px;height:48px;margin-bottom:22px;overflow:visible}
 .blade .ln{fill:none;stroke:var(--text-primary);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:var(--len,200);stroke-dashoffset:calc(var(--len,200) * (1 - var(--dp,0)))}
-.blade .a,.blade .b{transform-box:view-box;transform-origin:70px 24px}
-.blade .a{transform:rotate(calc(-8deg * var(--c,0)))}
-.blade .b{transform:rotate(calc(8deg * var(--c,0)))}
+.blade .a,.blade .b,.blade .bl{transform-box:view-box}
+.t-scissors .a,.t-scissors .b{transform-origin:70px 24px}
+.t-scissors .a{transform:rotate(calc(-8deg * var(--c,0)))}
+.t-scissors .b{transform:rotate(calc(8deg * var(--c,0)))}
+.t-razor .bl{transform-origin:78px 32.5px;transform:rotate(calc(-169deg * (1 - var(--u,0))))}
+.t-comb .tooth{stroke:var(--text-primary);stroke-width:1.6;stroke-linecap:round;transform-box:fill-box;transform-origin:top;--kt:clamp(0,(var(--u,0) * 1.35 - var(--i) / 19) * 5,1);opacity:var(--kt);transform:scaleY(var(--kt))}
+.t-clipper.buzz .body{animation:buzz .07s linear 6}
+@keyframes buzz{0%,100%{transform:translateX(0)}25%{transform:translateX(-.8px)}75%{transform:translateX(.8px)}}
+.t-brush .bub{fill:none;stroke:var(--text-primary);stroke-width:1.4;transform-box:fill-box;transform-origin:center;--kb:clamp(0,(var(--u,0) * 1.4 - var(--i) * .18) * 3,1);opacity:var(--kb);transform:translateY(calc((1 - var(--kb)) * 6px)) scale(calc(.4 + .6 * var(--kb)))}
+.blade.t-pole{width:40px;height:110px}
+.t-pole .glass{fill:#f3eee7;opacity:var(--dp,0)}
+.t-pole .shade{opacity:var(--dp,0)}
+.t-pole .rd{fill:var(--accent)}
+.t-pole .bu{fill:var(--pole-blue)}
+.t-pole .stripes{opacity:var(--dp,0);animation:pole 3.6s linear infinite;animation-delay:-1.2s}
+@keyframes pole{to{transform:translateY(-28px)}}
 .blade .pv{fill:var(--accent);opacity:clamp(0,(var(--dp,0) - .7) * 4,1)}
 .reveal .r{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
 .reveal.in .r{opacity:1;transform:none}
@@ -320,7 +334,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important}
   .reveal .r,.step .txt,.plist li{opacity:1;transform:none}
-  .blade{--dp:1;--c:0}
+  .blade{--dp:1;--c:0;--u:1}
   .ph img{transform:none}
   .ember{display:none}
 }
@@ -401,7 +415,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
   <section id="visit" aria-labelledby="visit-t">
     <div class="reveal">
-      <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
+      <svg class="blade t-scissors" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
       <p class="kick mono r">Как проходит визит</p>
       <h2 class="title r" id="visit-t">Без спешки и без сюрпризов</h2>
     </div>
@@ -424,7 +438,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="prices" class="prices" aria-labelledby="prices-t">
     <div class="prices-head reveal">
       <div>
-        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
+        <svg class="blade t-razor" viewBox="0 0 140 48" aria-hidden="true"><path class="ln" d="M14 29 H76 Q82 32.5 76 36 H14 Q8 32.5 14 29 Z"/><g class="bl"><path class="ln" d="M78 31 L126 21 Q133 23 131 29 L80 35"/></g><circle class="pv" cx="78" cy="32.5" r="2.6"/></svg>
         <p class="kick mono r">Цены</p>
         <h2 class="title r" id="prices-t">Цена известна до записи</h2>
         <p class="lede r">Барбер и эксперт-барбер отличаются опытом. Время и цена каждой услуги видны заранее.</p>
@@ -442,7 +456,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="shave" aria-labelledby="shave-t">
     <div class="shave-wrap">
       <div class="reveal">
-        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
+        <svg class="blade t-comb" viewBox="0 0 140 48" aria-hidden="true"><path class="ln" d="M12 15 H128 Q132 15 132 19 V21 H12 Z"/><line class="tooth" style="--i:0" x1="16" y1="21" x2="16" y2="35"/><line class="tooth" style="--i:1" x1="22" y1="21" x2="22" y2="35"/><line class="tooth" style="--i:2" x1="28" y1="21" x2="28" y2="35"/><line class="tooth" style="--i:3" x1="34" y1="21" x2="34" y2="35"/><line class="tooth" style="--i:4" x1="40" y1="21" x2="40" y2="35"/><line class="tooth" style="--i:5" x1="46" y1="21" x2="46" y2="35"/><line class="tooth" style="--i:6" x1="52" y1="21" x2="52" y2="35"/><line class="tooth" style="--i:7" x1="58" y1="21" x2="58" y2="35"/><line class="tooth" style="--i:8" x1="64" y1="21" x2="64" y2="35"/><line class="tooth" style="--i:9" x1="70" y1="21" x2="70" y2="35"/><line class="tooth" style="--i:10" x1="76" y1="21" x2="76" y2="35"/><line class="tooth" style="--i:11" x1="82" y1="21" x2="82" y2="35"/><line class="tooth" style="--i:12" x1="88" y1="21" x2="88" y2="35"/><line class="tooth" style="--i:13" x1="94" y1="21" x2="94" y2="35"/><line class="tooth" style="--i:14" x1="100" y1="21" x2="100" y2="35"/><line class="tooth" style="--i:15" x1="106" y1="21" x2="106" y2="35"/><line class="tooth" style="--i:16" x1="112" y1="21" x2="112" y2="35"/><line class="tooth" style="--i:17" x1="118" y1="21" x2="118" y2="35"/><line class="tooth" style="--i:18" x1="124" y1="21" x2="124" y2="35"/><circle class="pv" cx="128" cy="11" r="2.6"/></svg>
         <p class="kick mono r">Самый частый выбор</p>
         <h2 class="title r" id="shave-t">Стрижка и борода</h2>
         <p class="lede r">Один час, и голова с бородой в одном стиле. Зажмите кнопку и проведите бритвой сами.</p>
@@ -465,7 +479,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="masters" aria-labelledby="masters-t">
     <div class="masters-head reveal">
       <div>
-        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
+        <svg class="blade t-clipper" viewBox="0 0 140 48" aria-hidden="true"><g class="body"><path class="ln" d="M32 13 H116 Q129 13 129 24 Q129 35 116 35 H32 Z"/><path class="ln" d="M16 15 H32 V33 H16 Z"/><path class="ln" d="M10 17 H16 M10 21 H16 M10 25 H16 M10 29 H16 M10 33 H16"/><path class="ln" d="M60 19 H92"/><circle class="pv" cx="106" cy="24" r="3"/></g></svg>
         <p class="kick mono r">Мастера</p>
         <h2 class="title r" id="masters-t">Выберите своего барбера</h2>
         <p class="lede r">У каждого оценка 5 из 5 в онлайн-записи. Отзывы пишут клиенты после визита.</p>
@@ -478,7 +492,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="faq" aria-labelledby="faq-t">
     <div class="faq-wrap">
       <div class="reveal">
-        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
+        <svg class="blade t-brush" viewBox="0 0 140 48" aria-hidden="true"><path class="ln" d="M12 20 H52 Q57 24 52 28 H12 Q7 24 12 20 Z"/><path class="ln" d="M52 18.5 H62 V29.5 H52 Z"/><path class="ln" d="M62 18 Q88 6 96 24 Q88 42 62 30"/><circle class="bub" style="--i:0" cx="106" cy="21" r="3.5"/><circle class="bub" style="--i:1" cx="117" cy="27" r="4.5"/><circle class="bub" style="--i:2" cx="114" cy="13" r="2.6"/><circle class="bub" style="--i:3" cx="127" cy="18" r="2.2"/><circle class="pv" cx="57" cy="24" r="2.4"/></svg>
         <p class="kick mono r">Вопросы</p>
         <h2 class="title r" id="faq-t">Что обычно спрашивают</h2>
       </div>
@@ -509,7 +523,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="contacts" aria-labelledby="contacts-t">
     <div class="contacts">
       <div class="reveal">
-        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
+        <svg class="blade t-pole" viewBox="0 0 44 120" aria-hidden="true"><defs><clipPath id="poleGlass"><rect x="10" y="15" width="24" height="90"/></clipPath><linearGradient id="poleShade" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".22" stop-color="#fff" stop-opacity=".35"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset=".78" stop-color="#000" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient></defs><rect class="glass" x="10" y="15" width="24" height="90"/><g clip-path="url(#poleGlass)"><g class="stripes"><polygon class="rd" points="10,-40 34,-52 34,-44 10,-32"/><polygon class="bu" points="10,-26 34,-38 34,-30 10,-18"/><polygon class="rd" points="10,-12 34,-24 34,-16 10,-4"/><polygon class="bu" points="10,2 34,-10 34,-2 10,10"/><polygon class="rd" points="10,16 34,4 34,12 10,24"/><polygon class="bu" points="10,30 34,18 34,26 10,38"/><polygon class="rd" points="10,44 34,32 34,40 10,52"/><polygon class="bu" points="10,58 34,46 34,54 10,66"/><polygon class="rd" points="10,72 34,60 34,68 10,80"/><polygon class="bu" points="10,86 34,74 34,82 10,94"/><polygon class="rd" points="10,100 34,88 34,96 10,108"/><polygon class="bu" points="10,114 34,102 34,110 10,122"/><polygon class="rd" points="10,128 34,116 34,124 10,136"/><polygon class="bu" points="10,142 34,130 34,138 10,150"/></g><rect class="shade" x="10" y="15" width="24" height="90" fill="url(#poleShade)"/></g><path class="ln" d="M10 15 H34 V105 H10 Z"/><path class="ln" d="M7 15 V10 Q7 7 10 7 H34 Q37 7 37 10 V15 Z"/><path class="ln" d="M18 7 V4 Q22 1 26 4 V7"/><path class="ln" d="M7 105 V110 Q7 113 10 113 H34 Q37 113 37 110 V105 Z"/><circle class="pv" cx="22" cy="117" r="2.2"/></svg>
         <p class="kick mono r">Контакты</p>
         <h2 class="title r" id="contacts-t">Советской Армии, 201</h2>
         <dl class="r">
@@ -838,7 +852,7 @@ function setSound(v){
 soundBtn.addEventListener('click', () => setSound(!soundOn));
 document.addEventListener('visibilitychange', () => { if (!ac) return; if (document.hidden) ac.suspend(); else if (soundOn) ac.resume(); });
 
-/* ---------- scissors: draw themselves as a section scrolls in, then snip once ---------- */
+/* ---------- barber tools: draw themselves as a section scrolls in, then each does its one move ---------- */
 const blades = $$('.blade').map(el => ({ el, p: -1 }));
 blades.forEach(b => $$('.ln', b.el).forEach(l => l.style.setProperty('--len', Math.ceil(l.getTotalLength()) + 1)));
 let bladeRaf = null;
@@ -852,8 +866,12 @@ function drawBlades(){
     b.p = p;
     const dp = clamp(p / 0.6, 0, 1);
     const c = p <= 0.6 ? 0 : 0.5 - 0.5 * Math.cos((p - 0.6) / 0.4 * 2 * Math.PI);
+    const u = clamp((p - 0.5) / 0.4, 0, 1);
     b.el.style.setProperty('--dp', dp.toFixed(3));
     b.el.style.setProperty('--c', c.toFixed(3));
+    b.el.style.setProperty('--u', u.toFixed(3));
+    const buzz = c > 0.15 && c < 0.85;
+    if (buzz !== b.buzz){ b.buzz = buzz; b.el.classList.toggle('buzz', buzz); }
   }
 }
 const queueBlades = () => { if (bladeRaf === null) bladeRaf = requestAnimationFrame(drawBlades); };
