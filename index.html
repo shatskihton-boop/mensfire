@@ -265,6 +265,7 @@ h2.title{font:800 clamp(30px,4vw,56px)/1.08 var(--display);text-transform:upperc
 .master{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;min-width:0}
 .ava{width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-muted);margin-bottom:10px;background:var(--panel-2)}
 .master blockquote{margin:0 0 16px;font-size:15px;line-height:1.5;color:var(--text-primary);opacity:.9}
+.master .bio{margin:0 0 16px;font-size:15px;line-height:1.5;color:var(--text-secondary)}
 .master blockquote cite{display:block;margin-top:6px;font-style:normal;color:var(--text-secondary);font-size:13px}
 .master h3{margin:0;font:600 24px/1.1 var(--display);text-transform:uppercase}
 .master .lvl{margin:0;color:var(--accent);font:400 13px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}
@@ -406,7 +407,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="trust reveal" aria-label="Коротко о нас">
     <ul>
       <li class="r"><b><em data-count="5" data-dec="1">5,0</em></b><span>оценка в онлайн-записи</span></li>
-      <li class="r"><b data-count="17">17</b><span>отзывов о филиале</span></li>
+      <li class="r"><b data-count="192">192</b><span>отзыва о мастерах, все на 5 звёзд</span></li>
       <li class="r"><b data-count="4">4</b><span>мастера в команде</span></li>
       <li class="r"><b data-count="15">15</b><span>услуг в прайсе</span></li>
       <li class="r"><b>Онлайн</b><span>запись на своё время</span></li>
@@ -482,9 +483,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <svg class="blade t-clipper" viewBox="0 0 140 48" aria-hidden="true"><g class="body"><path class="ln" d="M32 13 H116 Q129 13 129 24 Q129 35 116 35 H32 Z"/><path class="ln" d="M16 15 H32 V33 H16 Z"/><path class="ln" d="M10 17 H16 M10 21 H16 M10 25 H16 M10 29 H16 M10 33 H16"/><path class="ln" d="M60 19 H92"/><circle class="pv" cx="106" cy="24" r="3"/></g></svg>
         <p class="kick mono r">Мастера</p>
         <h2 class="title r" id="masters-t">Выберите своего барбера</h2>
-        <p class="lede r">У каждого оценка 5 из 5 в онлайн-записи. Отзывы пишут клиенты после визита.</p>
+        <p class="lede r">У каждого оценка 5 из 5 в онлайн-записи. Отзывы оставляют клиенты после визита, всего их уже 192.</p>
       </div>
-      <div class="score r" aria-label="Оценка филиала 5 из 5, 17 отзывов"><b><em>5,0</em></b><span class="stars" aria-hidden="true">★★★★★</span><span>17 отзывов о филиале</span></div>
+      <div class="score r" aria-label="Средняя оценка мастеров 5 из 5, 192 отзыва"><b><em>5,0</em></b><span class="stars" aria-hidden="true">★★★★★</span><span>192 отзыва о мастерах</span></div>
     </div>
     <div class="masters reveal" id="mastersList"></div>
   </section>
@@ -791,7 +792,7 @@ new IntersectionObserver((es, o) => { if (!es[0].isIntersecting) return; o.disco
 
 /* ---------- masters, booking links, phone (all from assets/data.js) ---------- */
 const plural = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : (a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many); };
-$('#mastersList').innerHTML = MF.masters.map(m => `<article class="master r"><img class="ava" src="${m.photo}" alt="${m.name}, ${m.level.toLowerCase()}" width="100" height="100" loading="lazy"><h3>${m.name}</h3><p class="lvl">${m.level}</p><p class="rev"><span class="stars" aria-hidden="true">★★★★★</span> ${m.reviews} ${plural(m.reviews, 'отзыв', 'отзыва', 'отзывов')}</p>${m.quote ? `<blockquote>«${m.quote}»<cite>${m.author}</cite></blockquote>` : ''}<a class="btn sm" href="${m.link || MF.booking}" target="_blank" rel="noopener">Записаться к мастеру</a></article>`).join('');
+$('#mastersList').innerHTML = MF.masters.map(m => `<article class="master r"><img class="ava" src="${m.photo}" alt="${m.name}, ${m.level.toLowerCase()}" width="100" height="100" loading="lazy"><h3>${m.name}</h3><p class="lvl">${m.level}</p><p class="rev"><span class="stars" aria-hidden="true">★★★★★</span> ${m.reviews} ${plural(m.reviews, 'отзыв', 'отзыва', 'отзывов')}</p>${m.quote ? `<blockquote>«${m.quote}»<cite>${m.author}</cite></blockquote>` : (m.bio ? `<p class="bio">${m.bio}</p>` : '')}<a class="btn sm" href="${m.link || MF.booking}" target="_blank" rel="noopener">Записаться к мастеру</a></article>`).join('');
 $$('[data-book]').forEach(a => {
   if (MF.booking){ a.href = MF.booking; a.target = '_blank'; a.rel = 'noopener'; }
   else { a.href = '#book'; a.removeAttribute('target'); }

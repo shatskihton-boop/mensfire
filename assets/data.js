@@ -6,7 +6,7 @@ window.MENSFIRE = {
   mapQuery: 'Самара, улица Советской Армии, 201',
   booking: 'https://n712068.yclients.com/',
   phone: '+79277951777',
-  rating: { stars: 5, reviews: 17 },
+  rating: { stars: 5, reviews: 192 },   // сумма отзывов о мастерах в YCLIENTS: 66 + 63 + 56 + 7
 
   // Цены: [название, примечание, минут, рублей]
   prices: {
@@ -55,7 +55,8 @@ window.MENSFIRE = {
       link: 'https://n712068.yclients.com/company/672180/personal/select-master?o=m3675118',
       quote: 'Прекрасный мастер, знающий своё дело! Рекомендую, сделает всё по красоте!', author: 'Радион' },
     { name: 'Садык', level: 'ТОП-барбер', reviews: 56, photo: 'assets/masters/sadyk.png',
-      link: '', quote: '', author: '' },
+      link: '', quote: '', author: '',
+      bio: 'Классические и современные мужские стрижки, оформление бороды и усов.' },
     { name: 'Файз', level: 'ТОП-барбер', reviews: 7, photo: 'assets/masters/faiz.png',
       link: 'https://n712068.yclients.com/company/672180/personal/select-master?o=m5352339',
       quote: 'Очень качественно сделал причёску, очень понравилось, быстро, чётко.', author: 'Егор' }
