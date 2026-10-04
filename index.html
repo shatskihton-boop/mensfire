@@ -149,11 +149,13 @@ main section{position:relative;padding:clamp(80px,12vw,150px) var(--gutter)}
 .kick{color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:12px}
 h2.title{font:800 clamp(30px,4vw,56px)/1.08 var(--display);text-transform:uppercase;margin:0;letter-spacing:-.01em;max-width:18ch}
 .lede{color:var(--text-secondary);font-size:clamp(16px,1.3vw,19px);margin:22px 0 0;max-width:52ch}
-.blade{display:block;width:120px;height:40px;margin-bottom:22px;overflow:visible}
-.blade path{fill:none;stroke:var(--text-primary);stroke-width:1.4;stroke-linecap:round;stroke-dasharray:var(--len,200);stroke-dashoffset:var(--len,200);transition:stroke-dashoffset 1.8s var(--ease-out)}
-.blade circle{fill:var(--accent);opacity:0;transition:opacity .6s var(--ease-out) 1.4s}
-.in .blade path{stroke-dashoffset:0}
-.in .blade circle{opacity:1}
+/* scissors ornament: drawn by scroll (--dp), then one snip (--c), both written by JS */
+.blade{display:block;width:140px;height:48px;margin-bottom:22px;overflow:visible}
+.blade .ln{fill:none;stroke:var(--text-primary);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:var(--len,200);stroke-dashoffset:calc(var(--len,200) * (1 - var(--dp,0)))}
+.blade .a,.blade .b{transform-box:view-box;transform-origin:70px 24px}
+.blade .a{transform:rotate(calc(-8deg * var(--c,0)))}
+.blade .b{transform:rotate(calc(8deg * var(--c,0)))}
+.blade .pv{fill:var(--accent);opacity:clamp(0,(var(--dp,0) - .7) * 4,1)}
 .reveal .r{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
 .reveal.in .r{opacity:1;transform:none}
 .reveal.in .r:nth-child(2){transition-delay:.1s}
@@ -318,7 +320,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important}
   .reveal .r,.step .txt,.plist li{opacity:1;transform:none}
-  .blade path{stroke-dashoffset:0}.blade circle{opacity:1}
+  .blade{--dp:1;--c:0}
   .ph img{transform:none}
   .ember{display:none}
 }
@@ -399,7 +401,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
   <section id="visit" aria-labelledby="visit-t">
     <div class="reveal">
-      <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+      <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
       <p class="kick mono r">Как проходит визит</p>
       <h2 class="title r" id="visit-t">Без спешки и без сюрпризов</h2>
     </div>
@@ -422,7 +424,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="prices" class="prices" aria-labelledby="prices-t">
     <div class="prices-head reveal">
       <div>
-        <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
         <p class="kick mono r">Цены</p>
         <h2 class="title r" id="prices-t">Цена известна до записи</h2>
         <p class="lede r">Барбер и эксперт-барбер отличаются опытом. Время и цена каждой услуги видны заранее.</p>
@@ -440,7 +442,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="shave" aria-labelledby="shave-t">
     <div class="shave-wrap">
       <div class="reveal">
-        <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
         <p class="kick mono r">Самый частый выбор</p>
         <h2 class="title r" id="shave-t">Стрижка и борода</h2>
         <p class="lede r">Один час, и голова с бородой в одном стиле. Зажмите кнопку и проведите бритвой сами.</p>
@@ -463,7 +465,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="masters" aria-labelledby="masters-t">
     <div class="masters-head reveal">
       <div>
-        <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
         <p class="kick mono r">Мастера</p>
         <h2 class="title r" id="masters-t">Выберите своего барбера</h2>
         <p class="lede r">У каждого оценка 5 из 5 в онлайн-записи. Отзывы пишут клиенты после визита.</p>
@@ -476,7 +478,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="faq" aria-labelledby="faq-t">
     <div class="faq-wrap">
       <div class="reveal">
-        <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
         <p class="kick mono r">Вопросы</p>
         <h2 class="title r" id="faq-t">Что обычно спрашивают</h2>
       </div>
@@ -507,7 +509,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section id="contacts" aria-labelledby="contacts-t">
     <div class="contacts">
       <div class="reveal">
-        <svg class="blade r" viewBox="0 0 120 40" aria-hidden="true"><path d="M2 34 L100 6" style="--len:102"/><path d="M2 6 L100 34" style="--len:102"/><circle cx="51" cy="20" r="3"/></svg>
+        <svg class="blade" viewBox="0 0 140 48" aria-hidden="true"><g class="a"><circle class="ln" cx="18" cy="12" r="9"/><path class="ln" d="M26 16 Q48 20 70 24 L134 34"/></g><g class="b"><circle class="ln" cx="18" cy="36" r="9"/><path class="ln" d="M26 32 Q48 28 70 24 L134 14"/></g><circle class="pv" cx="70" cy="24" r="3"/></svg>
         <p class="kick mono r">Контакты</p>
         <h2 class="title r" id="contacts-t">Советской Армии, 201</h2>
         <dl class="r">
@@ -835,6 +837,30 @@ function setSound(v){
 }
 soundBtn.addEventListener('click', () => setSound(!soundOn));
 document.addEventListener('visibilitychange', () => { if (!ac) return; if (document.hidden) ac.suspend(); else if (soundOn) ac.resume(); });
+
+/* ---------- scissors: draw themselves as a section scrolls in, then snip once ---------- */
+const blades = $$('.blade').map(el => ({ el, p: -1 }));
+blades.forEach(b => $$('.ln', b.el).forEach(l => l.style.setProperty('--len', Math.ceil(l.getTotalLength()) + 1)));
+let bladeRaf = null;
+function drawBlades(){
+  bladeRaf = null;
+  for (const b of blades){
+    const r = b.el.getBoundingClientRect();
+    if (r.bottom < -60 || r.top > innerHeight + 60) continue;
+    const p = RM.matches ? 1 : Math.round(clamp((innerHeight * 0.95 - r.top) / (innerHeight * 0.55), 0, 1) * 500) / 500;
+    if (p === b.p) continue;
+    b.p = p;
+    const dp = clamp(p / 0.6, 0, 1);
+    const c = p <= 0.6 ? 0 : 0.5 - 0.5 * Math.cos((p - 0.6) / 0.4 * 2 * Math.PI);
+    b.el.style.setProperty('--dp', dp.toFixed(3));
+    b.el.style.setProperty('--c', c.toFixed(3));
+  }
+}
+const queueBlades = () => { if (bladeRaf === null) bladeRaf = requestAnimationFrame(drawBlades); };
+addEventListener('scroll', queueBlades, { passive: true });
+addEventListener('resize', queueBlades);
+RM.addEventListener('change', queueBlades);
+drawBlades();
 
 /* ---------- reduced motion, live ---------- */
 function pinToFinalStates(){
