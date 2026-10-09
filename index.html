@@ -700,7 +700,7 @@ function makeScrub(cfg){
   };
 }
 const scenes = [
-  makeScrub({ root: $('.hero'), stage: $('#stage'), video: $('#hero'), poster: $('#poster'), ring: $('#stage .ring'), url: 'assets/razor-scrub.mp4', bytes: 4776604, posterUrl: 'assets/razor-poster.jpg', rampFirst: true, lazy: false, onFrame: p => window.__mfSound && window.__mfSound(p) })
+  makeScrub({ root: $('.hero'), stage: $('#stage'), video: $('#hero'), poster: $('#poster'), ring: $('#stage .ring'), url: 'assets/razor-scrub.mp4', bytes: 2839873, posterUrl: 'assets/razor-poster.jpg', rampFirst: true, lazy: false, onFrame: p => window.__mfSound && window.__mfSound(p) })
 ];
 
 const GATES = [
@@ -837,7 +837,7 @@ window.__mfSound = p => {
   const now = performance.now();
   const vel = lastP === null ? 0 : Math.abs(p - lastP) / Math.max(16, now - lastT) * 1000;
   lastP = p; lastT = now;
-  const onStroke = p > 0.04 && p < 0.78 ? 1 : 0;        // the razor travels across the head in this stretch
+  const onStroke = p > 0.01 && p < 0.76 ? 1 : 0;        // the razor travels across the head in this stretch
   razorGain.gain.setTargetAtTime(Math.min(0.5, vel * 2.2) * onStroke, ac.currentTime, 0.05);
   clearTimeout(quietTimer);
   quietTimer = setTimeout(() => razorGain.gain.setTargetAtTime(0, ac.currentTime, 0.12), 120);
